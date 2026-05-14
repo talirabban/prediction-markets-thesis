@@ -1,0 +1,25 @@
+# Data — too big and re-fetchable, never commit
+data/raw/
+data/processed/
+results/
+*.parquet
+*.csv
+*.json
+
+# Notebooks / reports generated from notebooks
+*.html
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+*.swp
