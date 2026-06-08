@@ -1,0 +1,41 @@
+# Data — too big and re-fetchable, never commit
+data/raw/
+data/processed/
+*.parquet
+*.csv
+*.json
+
+# Generated artifacts — publish figures and selected summary tables
+results/models/
+results/tables/*
+!results/tables/model_comparison.csv
+!results/tables/decile_table.csv
+!results/tables/backtest_threshold_sweep.csv
+
+# Local scratch notebooks and old README
+*.html
+notebooks/idea.ipynb
+notebooks/01_snapshot_sanity_checks.ipynb
+READMEOLD.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+.claude/
+
+# Development-only scripts
+src/diagnose.py
+src/explore_snapshots.py
+src/inspect_data.py
+src/price_diagnostic.py
+src/test_sort.py

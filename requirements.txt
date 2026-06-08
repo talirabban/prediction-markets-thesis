@@ -1,0 +1,18 @@
+# Core scientific stack
+numpy>=1.26
+pandas>=2.2
+scipy>=1.13
+scikit-learn>=1.5
+pyarrow>=15.0
+
+# Plotting
+matplotlib>=3.9
+seaborn>=0.13
+
+# Data collection
+requests>=2.32
+tqdm>=4.66
+
+# Notebooks (you can use Jupyter or run .py scripts directly)
+jupyter>=1.0
+ipykernel>=6.29
