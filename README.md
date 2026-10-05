@@ -68,9 +68,9 @@ The feature set includes:
 
 To avoid look-ahead bias, the analysis uses:
 
-- a chronological 70/30 train-test split;
-- time-series cross-validation within the training period;
-- next-period evaluation on held-out observations only.
+- a chronological train-test split by resolution date (markets closing before May 7, 2026 for training; May 7–11, 2026 for testing);
+- time-series cross-validation (`TimeSeriesSplit`, 5 folds) within the training period for hyperparameter tuning;
+- evaluation on held-out observations only.
 
 ### Model Comparison
 
