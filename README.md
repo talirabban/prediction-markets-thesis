@@ -143,6 +143,7 @@ prediction-markets-thesis/
 │   ├── collect_prices.py
 │   ├── build_price_manifest.py
 │   ├── build_snapshots.py
+│   ├── explore_snapshots.py
 │   ├── train_models.py
 │   └── backtest.py
 └── results/
@@ -187,13 +188,21 @@ python src/build_price_manifest.py --min-volume 10000 --max-age-days 25
 python src/build_snapshots.py
 ```
 
-### 5. Train the models
+### 5. Run the calibration analysis
+
+```bash
+python src/explore_snapshots.py
+```
+
+<!-- Reads `data/processed/snapshots.parquet` and compares quoted prices with empirical YES-resolution rates across 10 price bins, with 95% bootstrap confidence intervals. It runs the analysis on the full and active samples, by snapshot horizon, and by category, and computes Brier scores. It writes the calibration figures to `results/figures/` and the summary tables (`calibration_main.csv`, `flb_summary.csv`, `calibration_by_horizon.csv`, `calibration_by_category.csv`, `brier_summary.csv`) to `results/tables/`. -->
+
+### 6. Train the models
 
 ```bash
 python src/train_models.py
 ```
 
-### 6. Run the backtest
+### 7. Run the backtest
 
 ```bash
 python src/backtest.py
