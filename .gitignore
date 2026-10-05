@@ -35,7 +35,6 @@ env/
 
 # Development-only scripts
 src/diagnose.py
-src/explore_snapshots.py
 src/inspect_data.py
 src/price_diagnostic.py
 src/test_sort.py
