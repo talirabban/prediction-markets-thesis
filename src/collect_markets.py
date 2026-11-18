@@ -2,15 +2,17 @@
 collect_markets.py  (PATCHED v3)
 ================================
 Pull resolved Polymarket markets from the Gamma API, ORDERED BY MOST RECENT
-RESOLUTION FIRST. This is the version that gets us markets whose prices
-still exist in CLOB.
+RESOLUTION FIRST, so the markets returned are the ones whose price history
+the collection step could retrieve.
 
 Changes from v2:
   - Added `order=closedTime&ascending=false`. Verified working via test_sort.py.
-    The previous default order returned mostly old markets whose price history
-    has been purged by the CLOB.
-  - `closedTime` is the *actual resolution time*, which is what aligns with
-    CLOB's ~30-day retention window — exactly the concept we want.
+    The previous default order returned mostly older markets, which came back
+    with empty price histories under the full-history request in collect_prices.py.
+  - `closedTime` is the *actual resolution time*, which is what the ~30-day
+    retention assumption in collect_prices.py is measured against.
+    NOTE: that assumption was later found to be at least partly a
+    request-parameter issue (see collect_prices.py).
 
 Output: data/raw/markets/page_NNNN.json
 
@@ -20,7 +22,7 @@ Usage:
 
 NOTE: Before re-running this after v2, delete the old cache:
     rm -rf data/raw/markets/
-The old cache was pulled in the wrong order and is dominated by stale markets.
+The old cache was pulled in the wrong order and is dominated by older markets.
 """
 
 from __future__ import annotations

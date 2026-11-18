@@ -199,14 +199,14 @@ python src/train_models.py
 python src/backtest.py
 ```
 
-The API data is not stored in the repository because it is large and re-fetchable. Historical availability may vary because the CLOB API retains price histories for a limited period after market resolution.
+The API data is not stored in the repository because it is large and re-fetchable. Price history is fetched with one full-history request per market, which can return empty results for older markets (see Limitations).
 
 ## Limitations
 
 - The out-of-sample test window covers five days, from May 7–11, 2026. Results should be interpreted as a methodology pilot rather than evidence of a stable production signal.
 - The conviction threshold `τ = 0.030` was selected post hoc based on test-set Sharpe-per-bet. Threshold-level results should therefore be interpreted as exploratory rather than as independently validated strategy performance.
-- Historical CLOB price retention restricted the analysis to recently resolved contracts.
+- Price history was collected with one full-history request per market and limited to contracts resolved in the last 25 days, based on an assumed ~30-day CLOB retention limit. Later testing showed older markets can return data when requested in smaller time windows, so this limit was partly a collection-method issue. The data was not re-collected.
 - The backtest uses flat \$1 stakes and does not model liquidity constraints, market impact, or execution slippage directly.
 - Transaction costs are evaluated through simplified sensitivity analysis rather than order-level execution modeling.
 - Market-category labels are heuristic.
-- The analysis uses a single chronological train-test split. A longer historical window would allow more robust walk-forward evaluation across multiple market regimes.
+- The analysis uses a single chronological train-test split. Re-collecting price history with windowed requests would allow a longer sample and walk-forward evaluation across multiple market regimes.

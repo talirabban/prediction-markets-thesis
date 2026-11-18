@@ -5,10 +5,16 @@ Pull YES-token price history from CLOB for markets that pass two filters:
   1. lifetime volume >= --min-volume
   2. resolved within the last --max-age-days
 
-The age filter exists because Polymarket's CLOB only retains price time-series
-for ~30 days after a market closes (metadata persists forever; bars do not).
-Confirmed empirically: markets older than ~28d return empty histories,
-markets within 28d return full histories.
+The age filter exists because full-history requests (interval=max, fidelity=60)
+returned empty results for markets older than ~28 days, which was taken to mean
+the CLOB only retains price time-series for ~30 days after a market closes.
+
+NOTE: this interpretation was later found to be at least partly wrong. In a
+later test, a market that closed ~5 months earlier returned no data for a
+single interval=max request but returned hourly bars when requested in
+15-day windows (startTs/endTs). The age filter below reflects the original
+assumption, and the data was not re-collected. Fetching older markets in
+windowed requests would likely extend the sample.
 
 Changes from v2:
   - New --max-age-days (default 25, giving a 5-day safety buffer).
